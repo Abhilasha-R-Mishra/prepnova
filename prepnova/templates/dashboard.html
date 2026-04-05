@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="flex">
+
+<!-- Sidebar -->
+<div class="w-64 h-screen bg-black/70 p-4 hidden md:block">
+    <a href="/dashboard" class="block py-2 hover:text-yellow-400">Dashboard</a>
+    <a href="/create-test" class="block py-2 hover:text-yellow-400">Create Test</a>
+</div>
+
+<!-- Content -->
+<div class="flex-1 p-6">
+
+<h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+
+<!-- Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="bg-white/10 p-4 rounded-xl">
+        <h3>Total Tests</h3>
+        <p class="text-2xl">{{ total_tests }}</p>
+    </div>
+
+    <div class="bg-white/10 p-4 rounded-xl">
+        <h3>Average Score</h3>
+        <p class="text-2xl">{{ avg_score }}</p>
+    </div>
+</div>
+
+<!-- Tests -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+{% for test in tests %}
+<div class="bg-white/10 p-4 rounded-xl hover:scale-105 transition">
+    <h3 class="text-lg font-bold">{{ test.title }}</h3>
+    <p class="text-sm">{{ test.category }}</p>
+    <a href="/test/{{test.id}}" class="mt-3 inline-block bg-yellow-400 text-black px-4 py-2 rounded">Start</a>
+</div>
+{% endfor %}
+</div>
+
+</div>
+</div>
+
+{% endblock %}

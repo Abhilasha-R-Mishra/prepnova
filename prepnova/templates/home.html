@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="relative h-[80vh] w-full overflow-hidden">
+
+    <!-- Slides -->
+    <div class="absolute inset-0 bg-cover bg-center slide active"
+         style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c');"></div>
+
+    <div class="absolute inset-0 bg-cover bg-center slide"
+         style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c');"></div>
+
+    <div class="absolute inset-0 bg-cover bg-center slide"
+         style="background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df');"></div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Text -->
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Crack Your Dream Job</h1>
+        <p class="text-lg md:text-xl mb-6">AI-powered interview preparation</p>
+        <a href="/dashboard" class="bg-yellow-400 text-black px-6 py-3 rounded-xl">Start Now</a>
+    </div>
+
+</div>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function showSlide() {
+    slides.forEach(s => s.style.opacity = "0");
+    slides[index].style.opacity = "1";
+    index = (index + 1) % slides.length;
+}
+
+setInterval(showSlide, 3000);
+showSlide();
+</script>
+
+{% endblock %}

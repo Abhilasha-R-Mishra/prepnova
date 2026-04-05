@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrepNova</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+    background: #0f0f0f;
+}
+</style>
+
+</head>
+<body class="text-white font-sans">
+
+<!-- Navbar -->
+<nav class="flex justify-between items-center px-6 py-4 bg-black/50 backdrop-blur-md">
+    <h1 class="text-2xl font-bold text-yellow-400">PrepNova</h1>
+
+    <div class="hidden md:flex gap-6">
+        <a href="/" class="hover:text-yellow-400">Home</a>
+        <a href="/dashboard" class="hover:text-yellow-400">Dashboard</a>
+    </div>
+
+    <a href="/dashboard" class="bg-yellow-400 text-black px-4 py-2 rounded-lg">Start</a>
+</nav>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
