@@ -1,44 +1,24 @@
----
-name: 'Build & Deploy'
+name: 'Deploy Django Application to AWS'
 'on':
   push:
     branches:
       - 'main'
-env:
-  CI: false
+      
 jobs:
-  build:
-    name: 'Build'
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v2'
-      - name: 'Setup Node'
-        uses: 'actions/setup-node@v1'
-        with:
-          node-version: 16
-      - name: 'Install dependencies'
-        uses: 'bahmutov/npm-install@v1'
-      - name: 'Build project'
-        run: 'npm run build'
-      - name: 'Upload production-ready build files'
-        uses: 'actions/upload-artifact@v2'
-        with:
-          name: 'production-files'
-          path: './build'
   deploy:
-    name: 'Deploy'
-    needs: 'build'
     runs-on: 'ubuntu-latest'
-    if: 'github.ref == ''refs/heads/main'''
     steps:
-      - name: 'Download artifact'
-        uses: 'actions/download-artifact@v2'
+      - name: 'Checkout Code'
+        uses: 'actions/checkout@v4'
+        
+      - name: 'Deploy Ia SSH'
+        uses: 'appleboy/ssh-action@v1.0.3'
         with:
-          name: 'production-files'
-          path: './build'
-      - name: 'Deploy to GitHub Pages'
-        uses: 'peaceiris/actions-gh-pages@v3'
-        with:
-          github_token: '${{ secrets.TOKEN }}'
-          publish_dir: './build'
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script:
+            cd / root/server_path'
+            git pull
+            doker compose up -d --build
+  
